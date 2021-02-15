@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const getStarshipsQuery = ({last, first}) => gql`{
     allStarships(last:${last}, first:${first}) {
@@ -7,9 +7,7 @@ export const getStarshipsQuery = ({last, first}) => gql`{
             name
             hyperdriveRating
             length
-            crew
             costInCredits
         }
     }
 }`
-

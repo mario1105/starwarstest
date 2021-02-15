@@ -1,30 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import { ApolloProvider } from '@apollo/client';
-import client from "./graphql/client"
+import React from "react"
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom'
+import './App.css'
+import { ApolloProvider } from '@apollo/client'
+import client from "graphql/client"
+import DashboardPage from "pages/DashboardPage"
+import HistoryPage from "pages/HistoryPage"
+import { GameProvider } from "modules/Dashboard/Game/GameContext"
 
 const App = () => {
 
-  return (
-      <ApolloProvider client={client}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-      </ApolloProvider>
-  );
+    return (
+        <ApolloProvider client={client}>
+            <div className="App">
+                <GameProvider>
+                    <Router>
+                        <Switch>
+                            <Route
+                                path="/dashboard"
+                                exact
+                                component={DashboardPage}
+                            />
+                            <Route
+                                path="/history"
+                                exact
+                                component={HistoryPage}
+                            />
+                            <Route
+                                component={() => <Redirect to={{ pathname: '/dashboard'}} />}
+                            />
+                        </Switch>
+                    </Router>
+                </GameProvider>
+            </div>
+        </ApolloProvider>
+    )
 }
 
-export default App;
+export default App

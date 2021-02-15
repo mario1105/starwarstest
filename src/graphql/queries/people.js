@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const getPeopleQuery = ({last, first}) => gql`{
     allPeople(last:${last}, first:${first}) {
@@ -7,7 +7,6 @@ export const getPeopleQuery = ({last, first}) => gql`{
             name
             height
             birthYear
-            gender
             mass
         }
     }
